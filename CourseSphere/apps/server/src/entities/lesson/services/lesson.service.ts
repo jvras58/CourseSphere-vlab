@@ -55,6 +55,10 @@ export class LessonService {
       limit = 10,
     } = filters;
 
+    if (courseId) {
+      await this.checkCourseInstructor(userId, courseId);
+    }
+
     const where: any = {
       course: {
         OR: [
@@ -67,15 +71,22 @@ export class LessonService {
     if (status) where.status = status;
     if (courseId) where.courseId = courseId;
 
-    const total = await this.prisma.lesson.count({ where });
-    const items = await this.prisma.lesson.findMany({
-      where,
-      skip: (page - 1) * limit,
-      take: limit,
-      orderBy: { createdAt: 'desc' },
-    });
+    try {
+      const total = await this.prisma.lesson.count({ where });
+      const items = await this.prisma.lesson.findMany({
+        where,
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          course: { select: { id: true, name: true } },
+        },
+      });
 
-    return { items, total, page, limit };
+      return { items, total, page, limit };
+    } catch (error) {
+      throw new Error(`Erro ao buscar lições: ${(error as Error).message}`);
+    }
   }
 
   async getById(userId: string, lessonId: string) {

@@ -17,7 +17,15 @@ export class LessonController {
   ) {
     try {
       const userId = (request.user as any).sub.userId;
-      const { items, total, page, limit } = await this.service.getAll(userId, request.query);
+      const schema = z.object({
+        title: z.string().min(1).optional(),
+        status: z.nativeEnum(LessonStatus).optional(),
+        courseId: z.string().optional(),
+        page: z.number().int().positive().default(1),
+        limit: z.number().int().min(10).max(20).default(10),
+      });
+      const filters = schema.parse(request.query);
+      const { items, total, page, limit } = await this.service.getAll(userId, filters);
       reply.send({ items, total, page, limit });
     } catch (error) {
       reply.status(400).send({ message: (error as Error).message });
@@ -48,7 +56,7 @@ export class LessonController {
         status: z.nativeEnum(LessonStatus),
         publishDate: z.string().datetime().refine(
           (date) => new Date(date) > new Date(),
-          { message: 'publishDate must be in the future' }
+          { message: 'A data de publicação deve estar no futuro' }
         ),
         videoUrl: z.string().url(),
         youtubeId: z.string().optional(),
@@ -77,7 +85,7 @@ export class LessonController {
         status: z.nativeEnum(LessonStatus).optional(),
         publishDate: z.string().datetime().optional().refine(
           (date) => !date || new Date(date) > new Date(),
-          { message: 'publishDate must be in the future' }
+          { message: 'A data de publicação deve estar no futuro' }
         ),
         videoUrl: z.string().url().optional(),
         youtubeId: z.string().optional(),

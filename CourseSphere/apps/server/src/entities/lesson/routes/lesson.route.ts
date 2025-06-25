@@ -14,11 +14,11 @@ export default async function lessonRoutes(fastify: FastifyInstance) {
         querystring: {
           type: 'object',
           properties: {
-            title: { type: 'string' },
-            status: { type: 'string', enum: Object.values(LessonStatus) },
-            courseId: { type: 'string' },
-            page: { type: 'number' },
-            limit: { type: 'number' },
+            title: { type: 'string', minLength: 1, description: 'Correspondência parcial para o título da lição (case-insensitive)' },
+            status: { type: 'string', enum: Object.values(LessonStatus), description: 'Filtro por status da lição' },
+            courseId: { type: 'string', description: 'Filtro por ID do curso' },
+            page: { type: 'number', minimum: 1, default: 1, description: 'Número da página' },
+            limit: { type: 'number', minimum: 10, maximum: 20, default: 10, description: 'Itens por página (10-20)' },
           },
         },
         response: {
@@ -41,6 +41,13 @@ export default async function lessonRoutes(fastify: FastifyInstance) {
                     creatorId: { type: 'string' },
                     createdAt: { type: 'string', format: 'date-time' },
                     updatedAt: { type: 'string', format: 'date-time' },
+                    course: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'string' },
+                        name: { type: 'string' },
+                      },
+                    },
                   },
                 },
               },
@@ -143,7 +150,7 @@ export default async function lessonRoutes(fastify: FastifyInstance) {
     '/:id',
     {
       schema: {
-        description: 'Update a lição',
+        description: 'Update uma lição',
         tags: ['Lesson'],
         params: {
           type: 'object',
@@ -189,7 +196,7 @@ export default async function lessonRoutes(fastify: FastifyInstance) {
     '/:id',
     {
       schema: {
-        description: 'Delete a lição',
+        description: 'Delete uma lição',
         tags: ['Lesson'],
         params: {
           type: 'object',
