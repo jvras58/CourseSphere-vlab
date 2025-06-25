@@ -1,5 +1,5 @@
 
-# 📄 MonoRepo Base - jvras
+# 📄 MonoRepo CourseSphere - jvras
 
 ## 📚 Sumário
 
@@ -19,7 +19,7 @@
 
 ## 📖 Sobre o Projeto
 
-O **MonoRepo Base** é um template para criar projetos rapidos com Next.js e Fastify RestApi
+O **MonoRepo CourseSphere** é um template para criar projetos rapidos com Next.js e Fastify RestApi
 
 ---
 
@@ -50,7 +50,7 @@ Este é um monorepo com a seguinte estrutura principal:
 
 ```bash
 
-Base/
+CourseSphere/
 ├── apps/
 │   ├── web/           # Front-end (Next.js)
 │   └── server/        # Back-end (Fastify)
@@ -70,8 +70,8 @@ Siga os passos abaixo para rodar o projeto localmente:
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/jvras58/full-stack-monorepo
-cd Base
+git clone https://github.com/jvras58/CourseSphere-vlab
+cd CourseSphere
 ```
 
 ### 2. Instale as dependências
@@ -140,7 +140,7 @@ Execute os testes do projeto com os comandos abaixo:
 
 > Documentação técnica interna detalhada:
 
-[📁 Documentação Técnica do Projeto](/Base/README.md)
+[📁 Documentação Técnica do Projeto](/CourseSphere/README.md)
 
 [📄DBML BANCO DE DADOS](/docs/PERSONAL/DBML.png)
 
