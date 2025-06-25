@@ -19,7 +19,8 @@
 
 ## 📖 Sobre o Projeto
 
-O **MonoRepo CourseSphere** é um template para criar projetos rapidos com Next.js e Fastify RestApi
+O **CourseSphere** é uma plataforma para gerenciamento colaborativo de cursos e aulas, permitindo múltiplos
+instrutores e estudantes autenticados interagirem.
 
 ---
 
