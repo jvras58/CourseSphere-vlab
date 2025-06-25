@@ -1,6 +1,6 @@
-# 🧩 Turborepo — Base
+# 🧩 Turborepo — CourseSphere
 
-Este repositório utiliza o [Turborepo](https://turbo.build/repo) para organizar o monorepo do projeto **Base**, com aplicações separadas de front-end e back-end, além de pacotes compartilháveis entre elas.
+Este repositório utiliza o [Turborepo](https://turbo.build/repo) para organizar o monorepo do projeto **CourseSphere**, com aplicações separadas de front-end e back-end, além de pacotes compartilháveis entre elas.
 
 ---
 
@@ -10,7 +10,7 @@ A estrutura de diretórios está organizada da seguinte forma:
 
 ```
 
-Base/
+CourseSphere/
 ├── apps/
 │   ├── web/           # Aplicação Next.js (Front-end)
 │   └── server/        # Aplicação Fastify.js (Back-end)
@@ -54,7 +54,7 @@ Este repositório inclui:
 ### 🔧 Build do Projeto
 
 ```bash
-cd Base
+cd CourseSphere
 pnpm build
 ````
 
@@ -65,7 +65,7 @@ Compila todas as aplicações e pacotes.
 ### 🚀 Ambiente de Desenvolvimento
 
 ```bash
-cd Base
+cd CourseSphere
 pnpm dev
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "base",
+  "name": "coursesphere",
   "private": true,
   "scripts": {
     "build": "turbo run build",
