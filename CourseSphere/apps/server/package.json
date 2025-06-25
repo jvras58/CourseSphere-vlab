@@ -14,7 +14,8 @@
     "test:cov": "jest --coverage",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "db:seed": "ts-node ./prisma/seed.ts",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "db:push:dev": "prisma db push --force-reset --accept-data-loss"
   },
   "jest": {
     "moduleFileExtensions": [
