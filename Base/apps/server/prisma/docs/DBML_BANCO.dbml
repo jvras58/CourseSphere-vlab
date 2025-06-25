@@ -1,0 +1,38 @@
+// DOCS: https://dbml.dbdiagram.io/docs/
+
+// Tabela de papéis (roles)
+Table roles {
+  id         integer   [pk, increment]
+  name       varchar   [not null]
+  created_at datetime  [default: `now()`]
+  updated_at datetime
+  deleted_at datetime
+}
+
+// Permissões associadas a cada papel
+Table permissions {
+  id          integer   [pk, increment]
+  role_id     integer   [not null, ref: > roles.id, delete: cascade]
+  action      varchar   [not null]
+  subject     varchar   [not null]
+  inverted    boolean   [default: false]
+  conditions  json
+  reason      text
+  created_at  datetime  [default: `now()`]
+  updated_at  datetime
+  deleted_at  datetime
+}
+
+// Usuários do sistema
+Table users {
+  id         varchar   [pk]
+  name       varchar   [not null]
+  email      varchar   [not null, unique]
+  password   varchar   [not null]
+  image      varchar
+  bio        text
+  createdAt  datetime  [default: `now()`]
+  updatedAt  datetime
+  isActive   boolean   [default: true]
+  role_id    integer   [not null, ref: > roles.id, delete: cascade]
+}
