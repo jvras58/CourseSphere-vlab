@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { PrismaClient, ClassStatus } from '@prisma/client';
+import { PrismaClient, LessonStatus } from '@prisma/client';
 import { hash } from 'argon2';
 
 const prisma = new PrismaClient();
@@ -96,13 +96,13 @@ async function seedCourses(adminId: string) {
 
 async function seedLessons(adminId: string, courseId: string) {
   const lessons = [
-    { title: 'Introdução', status: ClassStatus.PUBLISHED, publishDate: faker.date.future(), videoUrl: 'https://youtu.be/abc123', courseId, creatorId: adminId },
+    { title: 'Introdução', status: LessonStatus.PUBLISHED, publishDate: faker.date.future(), videoUrl: 'https://youtu.be/abc123', courseId, creatorId: adminId },
   ];
   for (const l of lessons) {
     // TODO: pegar um link verdadeiro kk
     const youtubeId = l.videoUrl.match(/(?:youtu\.be\/|v=)([^&]+)/)?.[1] || null;
     await prisma.lesson.upsert({
-      where: { title: l.title },
+      where: { title_courseId: { title: l.title, courseId: l.courseId } },
       create: { ...l, youtubeId, thumbnailUrl: `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg` },
       update: {  status: l.status, videoUrl: l.videoUrl,  youtubeId, thumbnailUrl: `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg` }
     });
