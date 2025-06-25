@@ -53,17 +53,15 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isActive  Boolean? @default(true)
+  deleted_at DateTime?
 
   sample       Sample[]
-
   createdCourses    Course[]           @relation("CourseCreator")
   instructorCourses CourseInstructor[] 
   studentCourses    CourseStudent[]    
   createdLessons    Lesson[]           @relation("LessonCreator")
-
   role     Role @relation(fields: [role_id], references: [id])
   role_id  Int
-
   @@map("users")
 }
 
