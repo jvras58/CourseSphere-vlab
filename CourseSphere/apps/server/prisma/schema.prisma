@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,13 +6,13 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
-//TODO: add a postgresql datasource neon database
+// TODO: add a postgresql datasource neon database
 // datasource db {
 //   provider = "postgresql"
 //   url      = env("DATABASE_URL")
 // }
 
-enum ClassStatus {
+enum LessonStatus {
   DRAFT
   PUBLISHED
   ARCHIVED
@@ -133,15 +130,15 @@ model CourseStudent {
 }
 
 model Lesson {
-  id           String      @id @default(cuid())
-  title        String      @unique   
-  status       ClassStatus @default(DRAFT)
-  publishDate  DateTime    @map("publish_date")
-  videoUrl     String      @map("video_url")
-  youtubeId    String?     @map("youtube_id")
-  thumbnailUrl String?     @map("thumbnail_url")
-  createdAt    DateTime    @default(now()) @map("created_at")
-  updatedAt    DateTime    @updatedAt    @map("updated_at")
+  id           String       @id @default(cuid())
+  title        String       
+  status       LessonStatus @default(DRAFT)
+  publishDate  DateTime     @map("publish_date")
+  videoUrl     String       @map("video_url")
+  youtubeId    String?      @map("youtube_id")
+  thumbnailUrl String?      @map("thumbnail_url")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt    @map("updated_at")
 
   courseId   String  @map("course_id")
   course     Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
@@ -149,5 +146,6 @@ model Lesson {
   creatorId  String  @map("creator_id")
   creator    User    @relation("LessonCreator", fields: [creatorId], references: [id], onDelete: Cascade)
 
+  @@unique([title, courseId])
   @@map("lessons")
 }
