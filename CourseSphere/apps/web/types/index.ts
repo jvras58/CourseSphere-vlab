@@ -33,6 +33,18 @@ export interface Course {
   students: { userId: string; name: string }[];
 }
 
+export interface Lesson {
+  id: string;
+  title: string;
+  status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
+  publishDate: string;
+  videoUrl: string;
+  youtubeId?: string;
+  thumbnailUrl?: string;
+  courseId: string;
+  creatorId: string;
+}
+
 
 
 export interface AuthResponse {

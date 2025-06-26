@@ -1,15 +1,17 @@
 'use client';
 
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { useSessionStore } from '@/modules/auth/stores/session-store';
 import { getCourseById } from '@/modules/courses/utils/course-api';
 import { CourseInstructorsManager } from '@/modules/courses/components/course-instructors-manager';
 import { ContentLayout } from '@/components/content-layout';
 import { Skeleton } from '@/components/ui/skeleton';
+import { LessonList } from '@/modules/lesson/components/lesson-list';
 
 type Props = {
-  params: { id: string };
+  params: { id: string; tab?: string };
 };
 
 export default function CourseDetailsPage({ params }: Props) {
@@ -38,17 +40,41 @@ export default function CourseDetailsPage({ params }: Props) {
   }
 
   return (
-    <ContentLayout title={`${course.name}`}>
-    {/* TODO: melhorar layout */}
-      <div className="space-y-6">
-        <div>
+    <ContentLayout title={course.name}>
+      <div className="border-b border-gray-200 mb-6">
+        <nav className="-mb-px flex space-x-8">
+          <Link
+            href={`/courses/${id}`}
+            className={`border-b-2 px-1 py-4 text-sm font-medium ${!params.tab ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
+          >
+            Detalhes
+          </Link>
+          <Link
+            href={`/courses/${id}/lessons`}
+            className={`border-b-2 px-1 py-4 text-sm font-medium ${params.tab === 'lessons' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
+          >
+            Aulas
+          </Link>
+          <Link
+            href={`/courses/${id}/instructors`}
+            className={`border-b-2 px-1 py-4 text-sm font-medium ${params.tab === 'instructors' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
+          >
+            Instrutores
+          </Link>
+        </nav>
+      </div>
+      
+      {!params.tab && (
+        <div className="space-y-4">
           <h2 className="text-xl font-semibold">{course.name}</h2>
           {course.description && <p className="text-muted-foreground">{course.description}</p>}
           <p>Início: {new Date(course.startDate).toLocaleDateString()}</p>
           <p>Término: {new Date(course.endDate).toLocaleDateString()}</p>
         </div>
-        <CourseInstructorsManager courseId={id} />
-      </div>
+      )}
+      
+      {params.tab === 'lessons' && <LessonList courseId={params.id} />}
+      {params.tab === 'instructors' && <CourseInstructorsManager courseId={params.id} />}
     </ContentLayout>
   );
 }
