@@ -32,10 +32,10 @@ export default function AuthenticationPage() {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-3 bg-foreground/40 p-6 backdrop-blur-sm rounded-lg border border-primary/20">
             <p className="text-3xl font-bold bg-gradient-to-r from-background to-background/80 bg-clip-text text-transparent">
-              BASE
+              CourseSphere
             </p>
             <p className="text-sm text-background/90">
-             Sistema de Autenticação de usuários.
+            Plataforma de gerenciamento de cursos.
             </p>
             <footer className="text-lg text-background/90">By jvras58</footer>
           </blockquote>

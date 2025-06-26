@@ -22,6 +22,17 @@ export interface Sample {
   description?: string
 }
 
+export interface Course {
+  id: string;
+  name: string;
+  description?: string;
+  startDate: string;
+  endDate: string;
+  creatorId: string;
+  instructors: { userId: string; name: string }[];
+  students: { userId: string; name: string }[];
+}
+
 
 
 export interface AuthResponse {

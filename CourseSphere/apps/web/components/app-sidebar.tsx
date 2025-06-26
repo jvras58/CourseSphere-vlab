@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Brain, Pencil } from "lucide-react";
+import { LayoutDashboard, Brain, Pencil, Book } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -17,6 +17,7 @@ import {
 
 const sidebarItems = [
   { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { title: "Cursos", href: "/courses", icon: Book },
   { title: "Perfil", href: "/settings", icon: Brain },
 ];
 

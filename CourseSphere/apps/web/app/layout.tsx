@@ -12,9 +12,9 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
 });
 
-const APP_NAME = "BASE";
-const APP_DEFAULT_TITLE = "Base";
-const APP_TITLE_TEMPLATE = "%s - Base";
+const APP_NAME = "CourseSphere";
+const APP_DEFAULT_TITLE = "CourseSphere";
+const APP_TITLE_TEMPLATE = "%s - CourseSphere";
 const APP_DESCRIPTION = "Powered by JVRAS";
 
 export const metadata: Metadata = {

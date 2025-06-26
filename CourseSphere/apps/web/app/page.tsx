@@ -1,49 +1,92 @@
 import type { Metadata } from "next"
-import Footer from "@/components/Footer"
-import TabsSection from "@/components/TabsSection"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Footer from "@/components/Footer"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 export const metadata: Metadata = {
   title: "Home",
+  description: "CourseSphere - Plataforma de gerenciamento de cursos",
 }
 
 export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">
-
-      <main className="flex-1 p-4 md:p-6 bg-muted/30">
-        <div className="grid gap-6">
-          {/* Welcome Section */}
-          <section className="w-full py-6 md:py-12 flex items-center justify-center min-h-[60vh]">
-            <div className="container px-4 md:px-6">
-              <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12">
-                <div className="flex flex-col justify-center space-y-4">
-                  <div className="space-y-2">
-                    <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-foreground">
-                      Bem-vindo a Landing Page do Base monorepo
-                    </h1>
-                    <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                      by Jvras58
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                    <Link href="/sign-in" className="w-full min-[400px]:w-auto">
-                      <Button className="bg-primary hover:bg-primary/90" asChild>
-                        <span>Login</span>
-                      </Button>
-                    </Link>
-                    <Link href="/sign-up" className="w-full min-[400px]:w-auto">
-                      <Button variant="outline" className="border-primary text-primary" asChild>
-                        <span>Cadastre-se</span>
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
+      <main className="flex-1">
+        <section className="text-primary-foreground py-20">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">
+              CourseSphere
+            </h1>
+            <p className="mt-4 text-lg sm:text-xl md:text-2xl text-primary-foreground/80">
+              Plataforma de gerenciamento de cursos: organize, crie e gerencie seus cursos com facilidade.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/sign-in" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto">Entrar</Button>
+              </Link>
+              <Link href="/sign-up" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full sm:w-auto">
+                  Cadastre-se
+                </Button>
+              </Link>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-muted/50">
+          <div className="container mx-auto px-4">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <CardTitle>Gestão de Cursos</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  Crie e organize módulos, aulas e conteúdos de forma intuitiva.
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <CardTitle>Matrículas e Usuários</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  Gerencie inscrições, perfis de alunos e instrutores em um só lugar.
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <CardTitle>Análises Avançadas</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  Monitore progresso, relatórios e métricas para melhorar resultados.
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold">
+              Pronto para impulsionar seus cursos?
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-gray-600">
+              Experimente o CourseSphere hoje mesmo e veja a diferença.
+            </p>
+            <Link href="/sign-up">
+              <Button size="lg" className="mt-6">
+                Iniciar Agora
+              </Button>
+            </Link>
+          </div>
+        </section>
       </main>
 
       <Footer />
