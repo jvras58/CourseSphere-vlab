@@ -50,7 +50,7 @@ export function LessonCard({ lesson, courseId, onRefetch }: Props) {
     <>
       <Card className="p-6 shadow-sm border border-muted transition hover:shadow-md flex flex-col gap-4">
         <div className="flex justify-between items-start">
-          <Link href={`/lessons/${lesson.id}`} className="space-y-1 flex-1 group">
+          <Link href={`#`} className="space-y-1 flex-1 group">
             <h2 className="text-lg font-semibold group-hover:underline">{lesson.title}</h2>
             <p className="text-sm text-muted-foreground">Status: {lesson.status}</p>
             <p className="text-sm text-muted-foreground">
