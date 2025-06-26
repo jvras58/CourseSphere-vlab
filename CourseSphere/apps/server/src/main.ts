@@ -12,9 +12,8 @@ const startServer = async () => {
 
   await registerPlugins(app);
   await registerRoutes(app);
-
   try {
-    await app.listen({ port });
+    await app.listen({ port, host: '0.0.0.0' });
     app.log.info(`Server running at http://localhost:${port}/`);
     app.log.info(`Swagger UI available at http://localhost:${port}/docs`);
   } catch (err) {
