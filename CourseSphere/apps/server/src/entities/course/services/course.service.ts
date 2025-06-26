@@ -16,9 +16,9 @@ export class CourseService {
     const course = await this.prisma.course.findUnique({
       where: { id: courseId },
     });
-    if (!course) throw new Error('Course not found');
+    if (!course) throw new Error('Curso não encontrado');
     if (course.creatorId !== userId) {
-      throw new UnauthorizedException('Only the course creator can perform this action');
+      throw new UnauthorizedException('Apenas o criador do curso pode realizar esta ação');
     }
   }
 
@@ -29,11 +29,11 @@ export class CourseService {
     const course = await this.prisma.course.findUnique({
       where: { id: courseId },
     });
-    if (!course) throw new Error('Course not found');
+    if (!course) throw new Error('Curso não encontrado');
     if (course.creatorId !== userId && !courseInstructor) {
-      throw new UnauthorizedException('User is not an instructor or creator of this course');
+      throw new UnauthorizedException('O usuário não é um instrutor ou criador do curso');
     }
-  }
+  } 
 
   async getAll(
     userId: string,
@@ -83,7 +83,7 @@ export class CourseService {
         students: true,
       },
     });
-    if (!course) throw new Error('Course not found');
+    if (!course) throw new Error('Curso não encontrado');
     return course;
   }
 
@@ -91,7 +91,7 @@ export class CourseService {
     const existingCourse = await this.prisma.course.findUnique({
       where: { name: data.name },
     });
-    if (existingCourse) throw new Error('Course name must be unique');
+    if (existingCourse) throw new Error('O nome do curso deve ser único');
 
     return this.prisma.course.create({
       data: {
@@ -115,7 +115,7 @@ export class CourseService {
         where: { name: data.name },
       });
       if (existingCourse && existingCourse.id !== courseId) {
-        throw new Error('Course name must be unique');
+        throw new Error('O nome do curso deve ser único');
       }
     }
     return this.prisma.course.update({
@@ -140,13 +140,13 @@ export class CourseService {
     const user = await this.prisma.user.findUnique({
       where: { id: instructorId },
     });
-    if (!user) throw new Error('Instructor not found');
+    if (!user) throw new Error('O instrutor não foi encontrado');
 
-    // Example: Fetch candidate data from randomuser.me (mocked for simplicity)
-    // In production, integrate with axios or fastify.http to call https://randomuser.me/api/
+    // Example: Fetch candidate data from randomuser.me
+    // TODO: Integrate with backend
     const response = await fetch('https://randomuser.me/api/');
     const candidateData = await response.json();
-    if (!candidateData.results) throw new Error('Failed to fetch instructor candidate');
+    if (!candidateData.results) throw new Error('Não foi possível buscar o candidato');
 
     return this.prisma.courseInstructor.create({
       data: {
@@ -161,8 +161,8 @@ export class CourseService {
     const courseInstructor = await this.prisma.courseInstructor.findFirst({
       where: { courseId, userId: instructorId },
     });
-    if (!courseInstructor) throw new Error('Instructor not found in course');
-    if (instructorId === userId) throw new Error('Creator cannot be removed as instructor');
+    if (!courseInstructor) throw new Error('O instrutor não foi encontrado no curso');
+    if (instructorId === userId) throw new Error('O criador do curso não pode ser removido como instrutor');
 
     await this.prisma.courseInstructor.delete({
       where: {
