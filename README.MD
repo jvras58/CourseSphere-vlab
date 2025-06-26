@@ -108,10 +108,27 @@ Acesse em: [http://localhost:3000](http://localhost:3000)
 * Página inicial
 
 ## WEB:
+
+Usuario para testes:
+
+admin:
+email:admin@example.com
+senha:admin123
+
+Instructor:
+email:instructor@example.com
+senha:instructor123
+
+estudante:
+email:student@example.com
+senha:aluno123
+
+
 [🔗 Acesse a Landing Page](http://localhost:3000/)
 [login Page](http://localhost:3000/sign-in)
 [Cadastro Page](http://localhost:3000/sign-up)
-[Dashboard page](http://localhost:3000/dashboard)
+[curso page](http://localhost:3000/courses)
+[aula page](http://localhost:3000/courses/:idcourse/lessons)
 
 ## SERVER:
 [📘 Documentação Swagger ](http://localhost:8000/docs)
@@ -126,14 +143,6 @@ Execute os testes do projeto com os comandos abaixo:
 | `pnpm run test`        | Executa todos os testes uma vez (modo padrão)          |
 | `pnpm run test:watch`  | Executa os testes em modo watch (atualização contínua) |
 | `pnpm run test:cov`    | Executa os testes e exibe o relatório de cobertura     |
-
----
-
-## 📝 Checklist
-
-> Acompanhe o progresso por etapas do projeto:
-
-[📋 Checklist de Desenvolvimento](/docs/PERSONAL/CHECKPOINT.MD)
 
 ---
 
