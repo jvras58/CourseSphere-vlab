@@ -15,7 +15,7 @@ export async function registerPlugins(app: FastifyInstance) {
   await app.register(swagger, {
     openapi: {
       info: {
-        title: 'Base Monorepo API',
+        title: 'API - CourseSphere',
         description: 'API documentation for base monorepo',
         version: '0.0.1',
       },
